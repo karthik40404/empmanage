@@ -36,7 +36,8 @@ td{
   }
   
   .f input[type="text"],
-  .f input[type="number"] {
+  .f input[type="number"] 
+  .f input[type="textarea"] {
     background-color: #fff;
   }
   

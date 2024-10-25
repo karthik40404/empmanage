@@ -4,7 +4,7 @@ import axios from "axios";
 const Emplist = () => {
   const [Emps, setEmps] = useState([]);
   const [editing, setEditing] = useState(false);
-  const [currentEmp, setcurrentEmp] = useState({ id: null, empid : null ,name:'', position:'', salary:null });
+  const [currentEmp, setcurrentEmp] = useState({ id: null, empid : null ,name:'', position:'',address:'', salary:null });
 
   useEffect(() => {
     axios.get('https://aiswarya2325.pythonanywhere.com/employemanagement/employees/')
@@ -44,6 +44,7 @@ const Emplist = () => {
             <td>ID</td>
             <td>EMP_ID</td>
             <td>NAME</td>
+            <td>ADDRESS</td>
             <td>POSITION</td>
             <td>SALARY</td>
             <td>EDIT</td>
@@ -56,6 +57,7 @@ const Emplist = () => {
               <td>{Emp.id}</td>
               <td>{Emp.empid}</td>
               <td>{Emp.name}</td>
+              <td>{Emp.address}</td>
               <td>{Emp.position}</td>
               <td>{Emp.salary}</td>
               <td>
@@ -95,47 +97,50 @@ const EditEmpForm = ({ currentEmp, updateEmp}) => {
     return (
       <form className="f" onSubmit={handleSubmit}>
       <h2>Edit Employee</h2>
-  {/* <div className="form-header">
-    <button type="button" className="close-btn" onClick={handleClose}>
-      &times;
-    </button>
-  </div> */}
-  <div>
-    <label>Employee ID</label>
-    <input
-      type="text"
-      name="empid"
-      value={Emp.empid}
-      onChange={handleInputChange}
-    />
-  </div>
-  <div>
-    <label>Name</label>
-    <input
-      type="text"
-      name="name"
-      value={Emp.name}
-      onChange={handleInputChange}
-    />
-  </div>
-  <div>
-    <label>Position</label>
-    <input
-      type="text"
-      name="position"
-      value={Emp.position}
-      onChange={handleInputChange}
-    />
-  </div>
-  <div>
-    <label>Salary</label>
-    <input
-      type="number"
-      name="salary"
-      value={Emp.salary}
-      onChange={handleInputChange}
-    />
-  </div>
+    <div>
+      <label>Employee ID</label>
+      <input
+        type="text"
+        name="empid"
+        value={Emp.empid}
+        onChange={handleInputChange}
+      />
+    </div>
+    <div>
+      <label>Name</label>
+      <input
+        type="text"
+        name="name"
+        value={Emp.name}
+        onChange={handleInputChange}
+      />
+    </div>
+    <div>
+      <label>Address</label>
+      <textarea
+        name="address"
+        value={Emp.address}
+        onChange={handleInputChange}
+      />
+      </div>
+    <div>
+      <label>Position</label>
+      <input
+        type="text"
+        name="position"
+        value={Emp.position}
+        onChange={handleInputChange}
+      />
+    </div>
+    <div>
+      <label>Salary</label>
+      <input
+        type="number"
+        name="salary"
+        value={Emp.salary}
+        onChange={handleInputChange}
+      />
+    </div>
   <button type="submit">Update Employee</button>
 </form>
 
