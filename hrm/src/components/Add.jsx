@@ -29,7 +29,7 @@ const handleSubmit =(e)=>{
 }
 
 return(
-    <div className="container">
+    <div className="container conatiner">
         <form onSubmit={handleSubmit}>
             <h2 className="text-info "><u>Add Employee</u></h2>
             <div>
@@ -96,7 +96,7 @@ return(
                 onChange={(e)=>setPhone(e.target.value)}
                 />
             </div>
-            <button type="submit" className="btn btn-success mt-3"> Add</button>
+            <button type="submit" className="btn btn-success mt-3 p-2"> Add employee</button>
         </form>
     </div>
 )
