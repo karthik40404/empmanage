@@ -3,12 +3,17 @@ import axios from "axios";
 
 const Emplist = () => {
   const [Emps, setEmps] = useState([]);
+  const [serEmp, setSerEmp] = useState([]);
+  const [filteredEmp, setFilteredEmp] = useState([]);
   const [editing, setEditing] = useState(false);
   const [currentEmp, setcurrentEmp] = useState({ id: null, empid : null ,name:'', position:'',address:'', salary:null });
 
   useEffect(() => {
-    axios.get('https://aiswarya2325.pythonanywhere.com/employemanagement/employees/')
-      .then((response) => setEmps(response.data))
+    axios.get('https://alan2325.pythonanywhere.com/employe/employees/')
+      .then((response) => {
+      setEmps(response.data)
+      setFilteredEmp(response.data)
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -19,7 +24,7 @@ const Emplist = () => {
 
   const updateEmp = (id, updatedEmp) => {
     setEditing(false);    
-    axios.put(`https://aiswarya2325.pythonanywhere.com/employemanagement/employees/${id}/`, updatedEmp)
+    axios.put(`https://alan2325.pythonanywhere.com/employe/employees/${id}/`, updatedEmp)
       .then((response) => {
         setEmps(Emps.map(Emp => (Emp.id === id ? response.data : Emp)));
       })
@@ -27,17 +32,26 @@ const Emplist = () => {
   };
   const deleteEmp = (id) => {
     setEditing(false);    
-    axios.delete(`https://aiswarya2325.pythonanywhere.com/employemanagement/employees/${id}/`)
+    axios.delete(`https://alan2325.pythonanywhere.com/employe/employees/${id}/`)
       .then(() => {
         setEmps(Emps.filter(Emp => Emp.id !== id));
       })
       .catch((error) => console.log(error));
   };
   
+  useEffect(()=>{
+    const result=Emps.filter(Emp=>
+      Emp.name.includes(serEmp)||
+      Emp.position.includes(serEmp)||
+      Emp.salary.toString().includes(serEmp)
+    )
+    setFilteredEmp(result)
+  }, [serEmp,Emps])
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-3">
       <h2>Employee List</h2>
+        <input type="search" className="se" placeholder="search" value={serEmp} onChange={(e)=> setSerEmp(e.target.value)}/>
       <table className="table table-bordered table-hover">
           <thead>
             <tr>
@@ -52,7 +66,7 @@ const Emplist = () => {
             </tr>
           </thead>
         <tbody>
-          {Emps.map((Emp) => (
+          {filteredEmp.map((Emp) => (
             <tr key={Emp.id}>
               <td>{Emp.id}</td>
               <td>{Emp.empid}</td>

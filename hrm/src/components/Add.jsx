@@ -13,7 +13,7 @@ const[salary,setSalary]=useState('')
 
 const handleSubmit =(e)=>{
     e.preventDefault();
-    axios.post('https://aiswarya2325.pythonanywhere.com/employemanagement/employees/',{empid,name,address,experiance,position,phone,email,salary})
+    axios.post('https://alan2325.pythonanywhere.com/employe/employees/',{empid,name,address,experiance,position,phone,email,salary})
     .then(response=>{
         console.log(response.data);
         setEmpid('');

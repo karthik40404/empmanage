@@ -5,7 +5,7 @@ function App() {
   return (
     <>
     <div className="App">
-      <h1>EMPLOYEE LIST</h1>
+      <h1>EMPLOYEE MANAGEMENT LIST</h1>
       <Emplist/>
       <AddEmplist/>
     </div>      
