@@ -9,7 +9,7 @@ const Emplist = () => {
   const [currentEmp, setcurrentEmp] = useState({ id: null, empid : null ,name:'', position:'',address:'', salary:null });
 
   useEffect(() => {
-    axios.get('https://alan2325.pythonanywhere.com/employe/employees/')
+    axios.get('http://127.0.0.1:8000/api/emp/')
       .then((response) => {
       setEmps(response.data)
       setFilteredEmp(response.data)
@@ -24,7 +24,7 @@ const Emplist = () => {
 
   const updateEmp = (id, updatedEmp) => {
     setEditing(false);    
-    axios.put(`https://alan2325.pythonanywhere.com/employe/employees/${id}/`, updatedEmp)
+    axios.put(`http://127.0.0.1:8000/api/emp/${id}/`, updatedEmp)
       .then((response) => {
         setEmps(Emps.map(Emp => (Emp.id === id ? response.data : Emp)));
       })
@@ -32,7 +32,7 @@ const Emplist = () => {
   };
   const deleteEmp = (id) => {
     setEditing(false);    
-    axios.delete(`https://alan2325.pythonanywhere.com/employe/employees/${id}/`)
+    axios.delete(`http://127.0.0.1:8000/api/emp/${id}/`)
       .then(() => {
         setEmps(Emps.filter(Emp => Emp.id !== id));
       })
